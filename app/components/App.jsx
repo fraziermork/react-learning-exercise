@@ -1,5 +1,4 @@
 import React        from 'react';
-import uuid         from 'node-uuid';
 import Notes        from './Notes.jsx';
 import NoteActions  from '../actions/NoteActions';
 import NoteStore    from '../stores/NoteStore';
