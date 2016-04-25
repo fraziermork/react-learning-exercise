@@ -1,12 +1,14 @@
 import React from 'react';
 
 export default class Note extends React.Component {
+  
   constructor(props){
     super(props);
     this.state = {
       editing: false
     };
   }
+  
   render(){
     if(this.state.editing){
       return this.renderEdit();
@@ -16,8 +18,13 @@ export default class Note extends React.Component {
   }
   
   renderNote = () => {
-    return <div onClick={this.edit}>{this.props.task}</div>;
+    const onDelete = this.props.onDelete;
+    return <div onClick={this.edit}>
+      <span>{this.props.task}</span>
+      {onDelete ? this.renderDelete() : null}
+    </div>;
   };
+  
   renderEdit = () => {
     return <input 
       type="text"
@@ -30,25 +37,35 @@ export default class Note extends React.Component {
       }
       ></input>;
   };
+  
+  renderDelete = () => {
+    return <button onClick={this.props.onDelete}>X</button>;
+  };
+  
   edit = () => {
     this.setState({
       editing: true
     });
   };
+  
   checkEnter = (e) => {
     if(e.key === 'Enter'){
       this.finishEdit(e);
     }
   };
+  
   finishEdit = (e) => {
     // console.log('finishEdit');
-    let value = e.target.value;
     if(this.props.onEdit){
-      this.props.onEdit(value);
+      let newTaskText = e.target.value;
+      this.props.onEdit(newTaskText);
       this.setState({
         editing: false
       });
     }
   };
+  
+  
+  
 }
 // ({task}) => <div>{task}</div>;
