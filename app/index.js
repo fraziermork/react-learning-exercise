@@ -1,5 +1,7 @@
-require(__dirname + '/style.css');
+import './style.css';
 
-var component = require(__dirname + '/component');
+import React from 'react';
+import ReactDom from 'react-dom';
+import App from './components/App.jsx';
 
-document.body.appendChild(component());
+ReactDom.render(<App />, document.getElementById('app'));
