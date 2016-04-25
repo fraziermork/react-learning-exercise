@@ -1,2 +1,3 @@
 import React from 'react';
-export default () => <div>Learn Things</div>;
+
+export default ({task}) => <div>{task}</div>;
