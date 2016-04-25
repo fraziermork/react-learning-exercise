@@ -21,15 +21,18 @@ export default class Note extends React.Component {
   //draws the initial note
   renderNote = () => {
     const onDelete = this.props.onDelete;
-    return <div onClick={this.edit}>
-      <span>{this.props.task}</span>
-      {onDelete ? this.renderDelete() : null}
-    </div>;
+    return (
+      <div onClick={this.edit}>
+        <span>{this.props.task}</span>
+        {onDelete ? this.renderDelete() : null}
+      </div>
+    );
   };
   
   //controls what gets shown when they click to edit
   renderEdit = () => {
-    return <input 
+    return (
+      <input 
       type="text"
       autoFocus={true}
       defaultValue={this.props.task}
@@ -38,7 +41,8 @@ export default class Note extends React.Component {
       ref={ //not sure what this does
         (element) => element ? element.selectionStart = this.props.task.length : null
       }
-      ></input>;
+      ></input>
+    );
   };
   
   renderDelete = () => { //pass the delete function down the chain for individual notes to call
