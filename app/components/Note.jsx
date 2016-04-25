@@ -1,14 +1,15 @@
 import React from 'react';
 
 export default class Note extends React.Component {
-  
-  constructor(props){
-    super(props);
+  //constructor for Note class
+  constructor(props){ //not sure what else gets passed in, formatting, etc. 
+    super(props); //attach the props to the React.Component prototype
     this.state = {
       editing: false
     };
   }
   
+  //actually do the drawing
   render(){
     if(this.state.editing){
       return this.renderEdit();
@@ -17,6 +18,7 @@ export default class Note extends React.Component {
     }
   }
   
+  //draws the initial note
   renderNote = () => {
     const onDelete = this.props.onDelete;
     return <div onClick={this.edit}>
@@ -25,6 +27,7 @@ export default class Note extends React.Component {
     </div>;
   };
   
+  //controls what gets shown when they click to edit
   renderEdit = () => {
     return <input 
       type="text"
@@ -32,13 +35,13 @@ export default class Note extends React.Component {
       defaultValue={this.props.task}
       onBlur={this.finishEdit}
       onKeyPress={this.checkEnter}
-      ref={
+      ref={ //not sure what this does
         (element) => element ? element.selectionStart = this.props.task.length : null
       }
       ></input>;
   };
   
-  renderDelete = () => {
+  renderDelete = () => { //pass the delete function down the chain for individual notes to call
     return <button onClick={this.props.onDelete}>X</button>;
   };
   
@@ -54,8 +57,7 @@ export default class Note extends React.Component {
     }
   };
   
-  finishEdit = (e) => {
-    // console.log('finishEdit');
+  finishEdit = (e) => { 
     if(this.props.onEdit){
       let newTaskText = e.target.value;
       this.props.onEdit(newTaskText);
@@ -68,4 +70,3 @@ export default class Note extends React.Component {
   
   
 }
-// ({task}) => <div>{task}</div>;

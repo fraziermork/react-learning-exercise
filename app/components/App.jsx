@@ -1,41 +1,27 @@
-import React from 'react';
-import uuid from 'node-uuid';
-import Notes from './Notes.jsx';
+import React        from 'react';
+import uuid         from 'node-uuid';
+import Notes        from './Notes.jsx';
+import NoteActions  from '../actions/NoteActions';
+import NoteStore    from '../stores/NoteStore';
 
 export default class App extends React.Component {
   
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state = {
-      notes: [
-        { 
-          id: uuid.v4(),
-          task: 'task 1'
-        }, 
-        {
-          id: uuid.v4(),
-          task: 'task 2'
-        },
-        {
-          id: uuid.v4(),
-          task: 'task 3'
-        }, 
-        {
-          id: uuid.v4(),
-          task: 'task 4'
-        }
-      ]
-    };
+    this.state = NoteStore.getState();
   }
   
-  addNote = () => {
-    this.setState({
-      notes: this.state.notes.concat([{
-        id: uuid.v4(),
-        task: 'New task'
-      }])
-    });
-  };
+  componentDidMount() {
+    NoteStore.listen(this.storeChanged);
+  }
+  
+  componentWillUnmount() {
+    NoteStore.unlisten(this.storeChanged);
+  }
+  
+  storeChanged = (state) => {
+    this.setState(state);
+  }
   
   render() {
     let notes = this.state.notes;
@@ -47,32 +33,24 @@ export default class App extends React.Component {
           onEdit={this.editNote}
           onDelete={this.deleteNote}
           ></Notes>  
-      </div>
-    );
-  }
+        </div>
+      );
+    }
+  
+  addNote = () => {
+    NoteActions.create({task: 'New task'});
+  };
   
   editNote = (id, task) => {
-    if(!task.trim()){
+    if(!task.trim()) {
       return;
     }
-    let notes = this.state.notes.map((note) => {
-      if(note.id === id && task) {
-        note.task = task;
-      }
-      return note;
-    });
-    this.setState({notes});
+    NoteActions.update({id, task});
   };
   
   deleteNote = (id, e) => {
-    console.log('got here');
     e.stopPropagation();
-    
-    this.setState({
-      notes: this.state.notes.filter((note) => {
-        return note.id !== id;
-      })
-    });
+    NoteActions.delete(id);
   };
   
 }

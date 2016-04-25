@@ -2,6 +2,7 @@ import React from 'react';
 import Note from './Note.jsx';
 
 export default ({notes, onEdit, onDelete}) => {
+  //this does the equivalent of angular's ng-repeat
   return (
     <ul>
       {notes.map((note) => {
