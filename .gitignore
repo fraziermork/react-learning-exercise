@@ -3,3 +3,4 @@ node_modules
 npm-debug.log
 dist
 init_example_src_files
+stats.json

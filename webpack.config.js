@@ -8,12 +8,15 @@ const TARGET  = process.env.npm_lifecycle_event;
 process.env.BABEL_ENV = TARGET;
 const PATHS   = {
   app: path.join(__dirname, 'app'), 
-  build: path.join(__dirname, 'build')
+  build: path.join(__dirname, 'build'), 
+  style: path.join(__dirname, 'app/style.css'),
+  test: path.join(__dirname, 'tests')
 };
 
 const common  = {
   entry: {
-    app: PATHS.app
+    app: PATHS.app,
+    style: PATHS.style
   }, 
   output: {
     path: PATHS.build,
@@ -41,6 +44,10 @@ const common  = {
 
 if(TARGET === 'start' || !TARGET) {
   module.exports = merge(common, {
+    entry: {
+      style: PATHS.style
+    },
+    devtool: 'eval-source-map',
     devServer: {
       devtool: 'eval-source-map',
       contentBase: PATHS.build,
@@ -60,5 +67,34 @@ if(TARGET === 'start' || !TARGET) {
     ]
   });
 } else if (TARGET === 'build') {
-  module.exports = merge(common, {});
+  module.exports = merge(common, {
+    entry: {
+      style: PATHS.style
+    }
+  });
+} else if (TARGET === 'test') {
+  module.exports = merge(common, {
+    devtool: 'inline-source-map',
+    resolve: {
+      alias: {
+        'app': PATHS.app
+      }
+    }, 
+    module: {
+      preLoaders: [
+        {
+          test: /\.jsx?$/,
+          loaders: ['isparta-instrumenter'],
+          include: PATHS.app
+        }
+      ], 
+      loaders: [
+        {
+          test: /\.jsx?$/,
+          loaders: ['babel?cacheDirectory'],
+          include: PATHS.test
+        }
+      ]
+    }
+  });
 }
