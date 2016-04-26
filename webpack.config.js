@@ -15,8 +15,7 @@ const PATHS   = {
 
 const common  = {
   entry: {
-    app: PATHS.app,
-    style: PATHS.style
+    app: PATHS.app
   }, 
   output: {
     path: PATHS.build,
@@ -44,10 +43,10 @@ const common  = {
 
 if(TARGET === 'start' || !TARGET) {
   module.exports = merge(common, {
-    entry: {
-      style: PATHS.style
-    },
-    devtool: 'eval-source-map',
+    // entry: {
+    //   style: PATHS.style
+    // },
+    // devtool: 'eval-source-map',
     devServer: {
       devtool: 'eval-source-map',
       contentBase: PATHS.build,
@@ -65,12 +64,6 @@ if(TARGET === 'start' || !TARGET) {
         save: true // --save
       })
     ]
-  });
-} else if (TARGET === 'build') {
-  module.exports = merge(common, {
-    entry: {
-      style: PATHS.style
-    }
   });
 } else if (TARGET === 'test') {
   module.exports = merge(common, {

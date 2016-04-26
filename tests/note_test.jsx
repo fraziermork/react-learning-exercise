@@ -1,4 +1,5 @@
 'use strict';
+
 import React from 'react';
 import {
   renderIntoDocument, 
@@ -21,7 +22,11 @@ describe('Note.jsx', () => {
     };
     
     let noteInstance = renderIntoDocument(
-      <Note onEdit={testClickFunction} onDelete={testClickFunction} task={'test'}></Note>
+      <Note 
+        onEdit={testClickFunction} 
+        onDelete={testClickFunction} 
+        task={'test'}
+      ></Note>
     )
     // let simulatedComponent = findRenderedDOMComponentWithTag(noteInstance, 'div');
     // assert.equal(simulatedComponent.textContent, 'test');
@@ -37,11 +42,14 @@ describe('Note.jsx', () => {
     var triggered = false;
     let value = 'value';
     let testEditFunction = (text) => {
-      console.log('hello world');
+      // console.log('hello world');
       triggered = text;
     };
     let noteInstance = renderIntoDocument(
-      <Note onEdit={testEditFunction} task={'test'}></Note>
+      <Note 
+        onEdit={testEditFunction} 
+        task={'test'}
+      ></Note>
     )
     
     let simulatedComponent = findRenderedDOMComponentWithTag(noteInstance, 'div');

@@ -6,13 +6,15 @@ export default ({notes, onEdit, onDelete}) => {
   return (
     <ul>
       {notes.map((note) => {
-        return <li key={note.id}>
-          <Note 
-            task={note.task}
-            onEdit={onEdit.bind(null, note.id)}
-            onDelete={onDelete.bind(null, note.id)}
+        return (
+          <li key={note.id}>
+            <Note 
+              task={note.task}
+              onEdit={onEdit.bind(null, note.id)}
+              onDelete={onDelete.bind(null, note.id)}
             ></Note>
-        </li>;
+          </li>
+        );
       })}
     </ul>
   );

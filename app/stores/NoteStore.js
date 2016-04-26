@@ -10,7 +10,7 @@ class NoteStore {
   }
   
   create(note) {
-    const notes = this.notes;
+    let notes = this.notes;
     note.id = uuid.v4(); //generate an id for the new note
     this.setState({ //use setstate instead of directly changing this.notes for clarity, debugging
       notes: notes.concat(note)

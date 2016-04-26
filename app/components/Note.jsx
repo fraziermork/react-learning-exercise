@@ -33,14 +33,14 @@ export default class Note extends React.Component {
   renderEdit = () => {
     return (
       <input 
-      type="text"
-      autoFocus={true}
-      defaultValue={this.props.task}
-      onBlur={this.finishEdit}
-      onKeyPress={this.checkEnter}
-      ref={ //not sure what this does
-        (element) => element ? element.selectionStart = this.props.task.length : null
-      }
+        type="text"
+        autoFocus={true}
+        defaultValue={this.props.task}
+        onBlur={this.finishEdit}
+        onKeyPress={this.checkEnter}
+        ref={ //not sure what this does
+          (element) => element ? element.selectionStart = this.props.task.length : null
+        }
       ></input>
     );
   };

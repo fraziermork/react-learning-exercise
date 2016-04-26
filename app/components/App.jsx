@@ -7,27 +7,27 @@ import NoteStore    from '../stores/NoteStore';
 export default class App extends React.Component {
   
   render() {
+    
     return (
       <div>
         <button onClick={this.addNote}>+</button>
-        
-        <AltCont
-          stores={[NoteStore]}
-          inject={{
-            notes: () => NoteStore.getState().notes
-          }} 
-        >
-          
-          <Notes 
-            onEdit={this.editNote}
-            onDelete={this.deleteNote}
-            >
-          </Notes>  
+          <AltCont
+            stores={[NoteStore]}
+            inject={{
+              notes: () => NoteStore.getState().notes
+            }}
+          >
+            
+            <Notes 
+              onEdit={this.editNote}
+              onDelete={this.deleteNote}
+            ></Notes>  
 
-        </AltCont>
-        </div>
-      );
-    }
+          </AltCont>
+        
+      </div>
+    );
+  }
   
   addNote = () => {
     NoteActions.create({task: 'New task'});
