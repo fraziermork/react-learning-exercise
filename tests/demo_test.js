@@ -1,11 +1,6 @@
 'use strict';
-import React from 'react';
-import {
-  renderIntoDocument, 
-  findRenderedDOMComponentWithClass
-} from 'react-addons-test-utils';
-import assert from 'assert';
 
+import assert from 'assert';
 
 describe('add', () => {
   it('adds', () => {

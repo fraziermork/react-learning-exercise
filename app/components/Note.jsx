@@ -2,7 +2,7 @@ import React from 'react';
 
 export default class Note extends React.Component {
   //constructor for Note class
-  constructor(props){ //not sure what else gets passed in, formatting, etc. 
+  constructor(props) { //not sure what else gets passed in, formatting, etc. 
     super(props); //attach the props to the React.Component prototype
     this.state = {
       editing: false
@@ -10,7 +10,7 @@ export default class Note extends React.Component {
   }
   
   //actually do the drawing
-  render(){
+  render() {
     if(this.state.editing){
       return this.renderEdit();
     } else {
