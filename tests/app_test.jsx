@@ -24,5 +24,4 @@ describe('App.jsx', () => {
     let renderedLis = scryRenderedDOMComponentsWithTag(renderedApp, 'li');
     assert.equal(renderedLis.length, 1);
   });
-  
 });
